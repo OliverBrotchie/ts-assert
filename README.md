@@ -1,5 +1,5 @@
 # TS Assert
-A coding challenge to create basic testing capabilities.
+A coding challenge to create simple testing capabilities.
 
 ## Assumptions
 
@@ -8,7 +8,7 @@ A coding challenge to create basic testing capabilities.
 
 ## Tests
 
-Either run the tests locally or view the results in [Github Actions]()!
+Either run the tests locally or verify the results in [Github Actions](https://github.com/OliverBrotchie/ts-assert/actions)!
 
 ### Run Tests Locally
 
