@@ -1,17 +1,4 @@
-import { assertEquals } from "./mod.ts";
-
-// Check that an assert fails and that the error message is correct
-function test_fail(message: string, expected: unknown, actual: unknown): void {
-    try {
-        assertEquals(message, actual, expected);
-    } catch (e) {
-        // Check that the error message is correct
-        if (message !== e.message)
-            throw new Error("Test returned incorrect error message.");
-        return;
-    }
-    throw new Error("Test did not throw an error.");
-}
+import { assertEquals, assertNotEquals } from "./mod.ts";
 
 // The defualt objects that were provided
 const o1 = {
@@ -73,7 +60,7 @@ Deno.test("String Pass", () => {
 });
 
 Deno.test("String Fail", () => {
-    test_fail("Test 02", "abc", "cba");
+    assertNotEquals("Test 02", "abc", "cba");
 });
 
 Deno.test("Numeric Pass", () => {
@@ -81,11 +68,11 @@ Deno.test("Numeric Pass", () => {
 });
 
 Deno.test("Numeric Fail", () => {
-    test_fail("Test 04", 20, 10);
+    assertNotEquals("Test 04", 20, 10);
 });
 
 Deno.test("Numeric Fail (NaN)", () => {
-    test_fail("Test 05", 20, Number.NaN);
+    assertNotEquals("Test 05", 20, Number.NaN);
 });
 
 Deno.test("Array Pass", () => {
@@ -93,19 +80,19 @@ Deno.test("Array Pass", () => {
 });
 
 Deno.test("Array Fail", () => {
-    test_fail("Test 07", ["a", "b", "c"], ["a", "b"]);
+    assertNotEquals("Test 07", ["a", "b", "c"], ["a", "b"]);
 });
 
 Deno.test("Array Fail (Length and Null)", () => {
-    test_fail("Test 08", ["a", "b", null], ["a", "b"]);
+    assertNotEquals("Test 08", ["a", "b", null], ["a", "b"]);
 });
 
 Deno.test("Array Fail (Object)", () => {
-    test_fail("Test 09", ["a"], { 0: "a" });
+    assertNotEquals("Test 09", ["a"], { 0: "a" });
 });
 
 Deno.test("Array Fail (Nested Object)", () => {
-    test_fail("Test 10", ["a", "b", "c"], ["a", "b", { 0: "c" }]);
+    assertNotEquals("Test 10", ["a", "b", "c"], ["a", "b", { 0: "c" }]);
 });
 
 Deno.test("Complex Object Pass", () => {
@@ -120,16 +107,16 @@ Deno.test("Complex Object Pass", () => {
 });
 
 Deno.test("Complex Object Fail 1", () => {
-    test_fail("Test 12", o1, o2);
+    assertNotEquals("Test 12", o1, o2);
 });
 
 // Both tests are needed to verify if unused props are not checked
 Deno.test("Complex Object Fail 2", () => {
-    test_fail("Test 13", o1, o3);
+    assertNotEquals("Test 13", o1, o3);
 });
 
 Deno.test("Complex Object Fail 3", () => {
-    test_fail("Test 14", o3, o1);
+    assertNotEquals("Test 14", o3, o1);
 });
 
 Deno.test("Class Pass", () => {
@@ -137,7 +124,7 @@ Deno.test("Class Pass", () => {
 });
 
 Deno.test("Class Fail (Constructor)", () => {
-    test_fail("Test 16", new Rectangle(20, 20), new Square(20));
+    assertNotEquals("Test 16", new Rectangle(20, 20), new Square(20));
 });
 
 Deno.test("Getter Pass", () => {
@@ -145,5 +132,5 @@ Deno.test("Getter Pass", () => {
 });
 
 Deno.test("Getter Fail ", () => {
-    test_fail("Test 18", Getter, Getter2);
+    assertNotEquals("Test 18", Getter, Getter2);
 });

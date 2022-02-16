@@ -1,6 +1,7 @@
 # TS Assert
 A coding challenge to create simple testing capabilities.
 
+
 ## Assumptions
 
 - Inputs are not or do not contain functions (as values) as only their signature can be tested for.
