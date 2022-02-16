@@ -22,6 +22,7 @@ const o3 = {
     propA: 1,
     propB: {
         propA: [1, { propA: "a", propB: "b" }, 3],
+        propB: 1,
     },
 };
 
