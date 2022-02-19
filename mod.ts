@@ -8,21 +8,23 @@ export class AssertionError extends Error {
     name = "AssertionError";
     constructor(
         message: string,
-        expected: unknown,
-        actual: unknown,
+        expected?: unknown,
+        actual?: unknown,
         type?: string
     ) {
         super(
-            `${message}: ${
-                type ? type + " mismatch," : ""
-            } expected ${expected} but found ${actual}`
+            expected && actual
+                ? `${message} - ${
+                      type ? type + " mismatch, " : ""
+                  }expected ${expected} but found ${actual}`
+                : message
         );
     }
 }
 
 /**
  * Asserts "expected" versus "actual",
- * 'failing' the assertion (via Error) if a difference is found.
+ * failing the assertion (via Error) if a difference is found.
  *
  * @param {String} message The comparison message passed by the user
  * @param {*} expected The expected item
@@ -74,5 +76,5 @@ export function assertNotEquals(
         return;
     }
     // If reached, no error was thrown
-    throw new Error(`${message}: values were equal`);
+    throw new AssertionError(`${message}: values were equal`);
 }
